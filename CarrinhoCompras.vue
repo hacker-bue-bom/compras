@@ -1,55 +1,26 @@
 <template>
  <div>
-  <div class="titlebox_container">
-      <div class="titlebox">
-        <img src="../assets/pkmlogo.png" id="pkmlogo">
+   <div id="titcont">
+      <div class="titlebox_container">
+        <img src="../assets/pokeback.jpg" id="pkmbk" >
+          <div class="titlebox">
+            <img src="../assets/pokelogo.png" id="pkmlogo">
+          </div>
+        <img src="../assets/pokeback.jpg" id="pkmbk2">
       </div>
-      
   </div>
+
+  
   <div class="bdy">
-        <div  class="item_container">
-            <button  class="item">
-              <img src="../assets/cards/celebi.png" class="card">
+        <div  class="item_container"  >
+          <div v-for="(card, num) in cardList" :key="num">
+            <button class="item">
+              
+              <img :src="getImage(cardList[0].image)" alt="" class="card" @click="addItem(card)">
             </button>
-            <button  class="item">
-              <img src="../assets/cards/charizard.png" class="card">
-            </button>
-            <button  class="item">
-              <img src="../assets/cards/dragonite.jpg" class="card">
-            </button>
-            <button  class="item">
-              <img src="../assets/cards/mew.png" class="card">
-            </button>
-            <button  class="item">
-              <img src="../assets/cards/jirachi.jpg" class="card">
-            </button>
-            <button  class="item">
-              <img src="../assets/cards/pikachu.jpg" class="card">
-            </button>
-            <button  class="item">
-            <img src="../assets/cards/mewtwo.jpg" class="card">
-            </button>
-            <button  class="item">
-              <img src="../assets/cards/umbreon.png" class="card">
-            </button>
-            <button  class="item">
-              <img src="../assets/cards/arceus.jpg" class="card">
-            </button>
-            <button  class="item">
-            <img src="../assets/cards/rayquaza.jpg" class="card">
-            </button>
-            <button  class="item">
-            <img src="../assets/cards/giratina.jpg" class="card">
-            </button>
-            <button  class="item">
-            <img src="../assets/cards/greninja.png" class="card">
-            </button>
-            <button  class="item">
-            <img src="../assets/cards/mewp.jpg" class="card">
-            </button>
-            <button  class="item">
-            <img src="../assets/cards/ball.jpg" class="card">
-            </button>
+          </div>
+            
+            
         </div>
         <div class="right_thing">
             column on the right that adds the items and gives the price total
@@ -62,7 +33,57 @@
 </template>
 
 
+<script>
+export default {
+  el: "app",
+  data() {
+      return{
+    itemIN: "",
+    quantityIN: "",
+    cardList: [
+      {
+        name: "pikachu",
+        price: 12,
+        image: "pikachu.jpg"
+
+      },
+      {
+        name: "mew",
+        price: 2,
+        image: "mew.png"
+      }
+    ],
+    cartList: [
+    ],
+      };
+  },
+  methods: {
+    getImage(nomeImagem) {
+    return require("../assets/cards/"+nomeImagem);
+  },
+
+    addItem: function (num) {
+      this.cartList.push({
+        name: this.quantityIN,
+        item: this.itemIN,
+        edit: num,
+      });
+    },
+    deleteitem: function (num) {
+      this.cartList.splice(num, 1);
+    },
+    editar: function (num) {
+      //num é a posicao do produto na lista
+      this.cartList[num].edit = true;
+    },
+  },
+}
+</script>
+
+
+
 <style>
+
 #pkmlogo{
   width: 100%; /* or any custom size */
   height: 100%; 
@@ -74,18 +95,26 @@
   height: 100%; 
   object-fit: contain;
 }
+
+#titcont{
+  display: flex;
+  justify-content: center;
+}
+
 .titlebox_container{
+  border: 6px solid 	#006400;
   display: flex;
   justify-content: center;
   text-align: center;
   margin: 40px;
-  background-color: blue;
-  width: auto;
-  height: 3cm;
+  width: 60%;
+  height: 3.5cm;
 }
 
 .titlebox{
-  background-color: grey;
+  display: flex;
+  justify-content: space-between;
+  background-color: #04aa6d ;
   width: 25cm;
   }
 
@@ -115,6 +144,7 @@
   flex-wrap: wrap;
   min-height: 400px;
   justify-content: center;
+  border: 6px solid 	#006400;
 }
 
 .item{
@@ -125,51 +155,4 @@
   border: 6px solid 	#006400;
     
 }
-
-
-
-
-
 </style>
-
-<script>
-export default {
-  el: "app",
-  data() {
-      return{
-    itemIN: "",
-    quantityIN: "",
-
-    productsList: [
-      {
-        quantity: 0,
-        item: "Apples",
-        edit: false,
-      },
-      {
-        quantity: 0,
-        item: "Pears",
-        edit: false,
-      },
-    ],
-      };
-  },
-  methods: {
-    addItem: function () {
-      this.productsList.push({
-        quantity: this.quantityIN,
-        item: this.itemIN,
-        edit: false,
-      });
-    },
-    deleteitem: function (id) {
-      console.log("asdfasfasdf");
-      this.itemsList.splice(id, 1);
-    },
-    editar: function (id) {
-      //id é a posicao do produto na lista
-      this.productsList[id].edit = true;
-    },
-  },
-}
-</script>
