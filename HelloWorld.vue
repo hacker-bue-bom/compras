@@ -13,9 +13,8 @@
     <div class="bdy">
       <div class="item_container">
         <div v-for="(card, num) in controlVar " :key="num">   <!--vamos mostar "controlVar" numero de cartas-->
-          <button class="item">
-            <img
-              :src="getImage(cardList[randdd(controlVar, cardList.length)].image)" alt="" class="card" @click="addItem(card)"/>
+          <button class="item" @click="addcard(card)" >
+            <img :src="getImage(cardList[randdd(controlVar, cardList.length)].image)" alt="" class="card" />
           </button>
         </div>
       </div>
@@ -116,6 +115,31 @@ export default {
           price: 2,
           image: "umbreon.png",
         },
+        {
+          name: "cyn",
+          price: 2,
+          image: "cyn.jpg",
+        },
+        {
+          name: "tyran",
+          price: 2,
+          image: "tyran.png",
+        },
+        {
+          name: "pikamax",
+          price: 2,
+          image: "pikamax.jpg",
+        },
+        {
+          name: "redblue",
+          price: 2,
+          image: "redblue.jpg",
+        },
+        {
+          name: "zoro",
+          price: 2,
+          image: "zoro.jpg",
+        },
       ],
       cartList: [],
     };
@@ -152,7 +176,7 @@ export default {
       
     },
 
-    addItem: function (num) {
+    addcard: function (num) {
       this.cartList.push({
         name: this.quantityIN,
         item: this.itemIN,
@@ -174,13 +198,13 @@ export default {
 
 <style>
 #pkmlogo {
-  width: 100%; /* or any custom size */
+  width: 100%; 
   height: 100%;
   object-fit: contain;
 }
 
 .card {
-  width: 100%; /* or any custom size */
+  width: 100%;
   height: 100%;
   object-fit: contain;
 }
