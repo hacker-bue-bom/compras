@@ -140,6 +140,16 @@ export default {
           price: 2,
           image: "zoro.jpg",
         },
+        {
+          name: "energy",
+          price: 4,
+          image: "energy.jpg",
+        },
+        {
+          name: "kek",
+          price: 100,
+          image: "kekw VMAX.png",
+        },
       ],
       cartList: [],
     };
