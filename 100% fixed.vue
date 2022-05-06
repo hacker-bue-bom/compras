@@ -14,7 +14,7 @@
       <div class="item_container">
         <div v-for="(card, num) in controlVar " :key="num">   <!--vamos mostar "controlVar" numero de cartas-->
           <button class="item" @click="addcard(card)">
-            <img :src="getImage(cardList[num].image)" alt="" class="card"/>
+            <img :src="getImage(num)" alt="" class="card"/>
           </button>
         </div>
       </div>
@@ -156,10 +156,13 @@ export default {
       cartList: [],
     };
   },
+  mounted(){
+      this.randdd();
+  },
   methods: {
-    getImage(nomeImagem) {
+    getImage(num) {
       this.randdd(this.controlVar, this.cardList.length)
-      return require("../assets/cards/" + nomeImagem);
+      return require("../assets/cards/" + this.cardList[this.randCardList[num]].image);
     },
     randdd() {
       while (this.counter < this.controlVar) {  
@@ -180,13 +183,6 @@ export default {
         console.log("this randCardList: " + this.randCardList)
       }
       
-    },
-
-    fetchFromRes(num) { 
-        if (this.randCardList.length == this.controlVar) {
-        var b = this.randCardList[num]
-        return this.cardList[b]
-        }
     },
 
     addcard: function (num) {
