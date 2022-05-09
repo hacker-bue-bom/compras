@@ -13,7 +13,7 @@
     <div class="bdy">
       <div class="item_container">
         <div v-for="(card, num) in controlVar " :key="num">   <!--vamos mostar "controlVar" numero de cartas-->
-          <button class="item" @click="addcard(card)">
+          <button class="item" @click="addcard(num)">
             <img :src="getImage(num)" alt="" class="card"/>
           </button>
         </div>
@@ -52,61 +52,51 @@ export default {
           price: 2,
           image: "arceus.jpg",
         },
-
         {
           name: "ball",
           price: 2,
           image: "ball.jpg",
         },
-
         {
           name: "celebi",
           price: 2,
           image: "celebi.png",
         },
-
         {
           name: "charizard",
           price: 2,
           image: "charizard.png",
         },
-
         {
           name: "dragonite",
           price: 2,
           image: "dragonite.jpg",
         },
-
         {
           name: "giratina",
           price: 2,
           image: "giratina.jpg",
         },
-
         {
           name: "greninja",
           price: 2,
           image: "greninja.png",
         },
-
         {
           name: "jirachi",
           price: 2,
           image: "jirachi.jpg",
         },
-
         {
           name: "mewp",
           price: 2,
           image: "mewp.jpg",
         },
-
         {
           name: "mewtwo",
           price: 2,
           image: "mewtwo.jpg",
         },
-
         {
           name: "rayquaza",
           price: 2,
@@ -156,9 +146,6 @@ export default {
       cartList: [],
     };
   },
-  mounted(){
-      this.randdd();
-  },
   methods: {
     getImage(num) {
       this.randdd(this.controlVar, this.cardList.length)
@@ -184,13 +171,13 @@ export default {
       }
       
     },
-
     addcard: function (num) {
       this.cartList.push({
-        name: this.quantityIN,
-        item: this.itemIN,
-        edit: num,
-      });
+        name: this.cardList[num].name,
+        price: this.cardList[num].price,
+        id: this.id
+      })
+      console.log("cartlist: " + this.cartlist)
     },
     deleteitem: function (num) {
       this.cartList.splice(num, 1);
@@ -211,18 +198,15 @@ export default {
   height: 100%;
   object-fit: contain;
 }
-
 .card {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
-
 #titcont {
   display: flex;
   justify-content: center;
 }
-
 .titlebox_container {
   border: 6px solid #006400;
   display: flex;
@@ -232,19 +216,16 @@ export default {
   width: 60%;
   height: 3.5cm;
 }
-
 .titlebox {
   display: flex;
   justify-content: space-between;
   background-color: #04aa6d;
   width: 25cm;
 }
-
 .bdy {
   margin: 40px;
   display: flex;
 }
-
 .right_thing {
   background-color: crimson;
   margin-left: auto;
@@ -253,11 +234,9 @@ export default {
   margin-right: 10px;
   width: 250px;
 }
-
 .actual_right_thing {
   background-color: pink;
 }
-
 .item_container {
   background-color: #04aa6d;
   margin: 10px;
@@ -268,7 +247,6 @@ export default {
   justify-content: center;
   border: 6px solid #006400;
 }
-
 .item {
   all: unset;
   background-color: green;
