@@ -18,9 +18,11 @@
           </button>
         </div>
       </div>
-      <div class="right_thing">
+      <div class="right_thing" >
         column on the right that adds the items and gives the price total
-        <div class="actual_right_thing">the actual shopping cart</div>
+        <div class="actual_right_thing" v-for="(card, num2) in cart " :key="num2"> 
+          {{cart}}  <br>
+        </div>
       </div>
     </div>
   </div>
@@ -143,7 +145,7 @@ export default {
           image: "kekw VMAX.png",
         },
       ],
-      cartList: [],
+      cart: [],
     };
   },
   methods: {
@@ -172,19 +174,20 @@ export default {
       
     },
     addcard: function (num) {
-      this.cartList.push({
-        name: this.cardList[num].name,
-        price: this.cardList[num].price,
-        id: this.id
-      })
-      console.log("cartlist: " + this.cartlist)
+      const myobj = {}
+      myobj.name = this.cardList[this.randCardList[num]].name
+      myobj.price = this.cardList[this.randCardList[num]].price
+      this.cart.push(myobj)
+      console.log(myobj)
+      console.log(num)
+      console.log("cart: " + this.cart)
     },
     deleteitem: function (num) {
-      this.cartList.splice(num, 1);
+      this.cart.splice(num, 1);
     },
     editar: function (num) {
       //num é a posicao do produto na lista
-      this.cartList[num].edit = true;
+      this.cart[num].edit = true;
     },
   },
 };
