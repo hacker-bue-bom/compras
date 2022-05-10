@@ -20,9 +20,16 @@
       </div>
       <div class="right_thing" >
         column on the right that adds the items and gives the price total
-        <div class="actual_right_thing" v-for="(card, num2) in cart " :key="num2"> 
+        <div class="actual_right_thing" > 
           {{cart}}  <br>
         </div>
+        <div class="buy">
+          total a pagar: {{total}}
+          <button @click="addcard(num)">
+           buy
+          </button>
+        </div>
+        
       </div>
     </div>
   </div>
@@ -34,6 +41,7 @@ export default {
   el: "app",
   data() {
     return {
+      total: 0,
       counter: 0,
       a: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
       randCardList: [],
@@ -51,37 +59,37 @@ export default {
         },
         {
           name: "arceus",
-          price: 2,
+          price: 25,
           image: "arceus.jpg",
         },
         {
           name: "ball",
-          price: 2,
+          price: 129,
           image: "ball.jpg",
         },
         {
           name: "celebi",
-          price: 2,
+          price: 15,
           image: "celebi.png",
         },
         {
           name: "charizard",
-          price: 2,
+          price: 200,
           image: "charizard.png",
         },
         {
           name: "dragonite",
-          price: 2,
+          price: 199,
           image: "dragonite.jpg",
         },
         {
           name: "giratina",
-          price: 2,
+          price: 400,
           image: "giratina.jpg",
         },
         {
           name: "greninja",
-          price: 2,
+          price: 5,
           image: "greninja.png",
         },
         {
@@ -91,27 +99,27 @@ export default {
         },
         {
           name: "mewp",
-          price: 2,
+          price: 5,
           image: "mewp.jpg",
         },
         {
           name: "mewtwo",
-          price: 2,
+          price: 2000,
           image: "mewtwo.jpg",
         },
         {
           name: "rayquaza",
-          price: 2,
+          price: 69,
           image: "rayquaza.jpg",
         },
         {
           name: "umbreon",
-          price: 2,
+          price: 25,
           image: "umbreon.png",
         },
         {
           name: "cyn",
-          price: 2,
+          price: 5,
           image: "cyn.jpg",
         },
         {
@@ -121,17 +129,17 @@ export default {
         },
         {
           name: "pikamax",
-          price: 2,
+          price: 25,
           image: "pikamax.jpg",
         },
         {
           name: "redblue",
-          price: 2,
+          price: 200,
           image: "redblue.jpg",
         },
         {
           name: "zoro",
-          price: 2,
+          price: 40,
           image: "zoro.jpg",
         },
         {
@@ -141,7 +149,7 @@ export default {
         },
         {
           name: "kek",
-          price: 100,
+          price: 10000,
           image: "kekw VMAX.png",
         },
       ],
@@ -178,9 +186,7 @@ export default {
       myobj.name = this.cardList[this.randCardList[num]].name
       myobj.price = this.cardList[this.randCardList[num]].price
       this.cart.push(myobj)
-      console.log(myobj)
-      console.log(num)
-      console.log("cart: " + this.cart)
+      this.total += this.cardList[this.randCardList[num]].price
     },
     deleteitem: function (num) {
       this.cart.splice(num, 1);
