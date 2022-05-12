@@ -18,23 +18,20 @@
           </button>
         </div>
       </div>
-      <div class="right_thing" >
-        column on the right that adds the items and gives the price total
-        <div class="actual_right_thing" > 
-          {{cart}}  <br>
+      <div class="right_thing">
+        <div class="actual_right_thing" >   <!--v-for="(carta, num) in cart" :key="num"-->
+          {{cart}} <br>
         </div>
         <div class="buy">
-          total a pagar: {{total}}
+          total a pagar: {{total}} €
           <button @click="addcard(num)">
            buy
           </button>
         </div>
-        
       </div>
     </div>
   </div>
 </template>
-
 
 <script>
 export default {
@@ -51,106 +48,127 @@ export default {
           name: "pikachu",
           price: 12,
           image: "pikachu.jpg",
+          yes: 1
         },
         {
           name: "mew",
           price: 2,
           image: "mew.png",
+          yes: 1
         },
         {
           name: "arceus",
           price: 25,
           image: "arceus.jpg",
+          yes: 1
         },
         {
           name: "ball",
           price: 129,
           image: "ball.jpg",
+          yes: 1
         },
         {
           name: "celebi",
           price: 15,
           image: "celebi.png",
+          yes: 1
         },
         {
           name: "charizard",
           price: 200,
           image: "charizard.png",
+          yes: 1
         },
         {
           name: "dragonite",
           price: 199,
           image: "dragonite.jpg",
+          yes: 1
         },
         {
           name: "giratina",
-          price: 400,
+          price: 40,
           image: "giratina.jpg",
+          yes: 1
         },
         {
           name: "greninja",
           price: 5,
           image: "greninja.png",
+          yes: 1
         },
         {
           name: "jirachi",
           price: 2,
           image: "jirachi.jpg",
+          yes: 1
         },
         {
           name: "mewp",
           price: 5,
           image: "mewp.jpg",
+          yes: 1
         },
         {
           name: "mewtwo",
-          price: 2000,
+          price: 350,
           image: "mewtwo.jpg",
+          yes: 1
         },
         {
           name: "rayquaza",
           price: 69,
           image: "rayquaza.jpg",
+          yes: 1
         },
         {
           name: "umbreon",
           price: 25,
           image: "umbreon.png",
+          yes: 1
         },
         {
           name: "cyn",
           price: 5,
           image: "cyn.jpg",
+          yes: 1
         },
         {
           name: "tyran",
           price: 2,
           image: "tyran.png",
+          yes: 1
         },
         {
           name: "pikamax",
           price: 25,
           image: "pikamax.jpg",
+          yes: 1
         },
         {
           name: "redblue",
           price: 200,
           image: "redblue.jpg",
+          yes: 1
         },
         {
           name: "zoro",
           price: 40,
           image: "zoro.jpg",
+          yes: 1
         },
         {
           name: "energy",
           price: 4,
           image: "energy.jpg",
+          yes: 1
         },
         {
           name: "kek",
-          price: 10000,
+          price: 1,
           image: "kekw VMAX.png",
+          yes: 1
         },
       ],
       cart: [],
@@ -179,14 +197,20 @@ export default {
         }
         console.log("this randCardList: " + this.randCardList)
       }
-      
     },
     addcard: function (num) {
       const myobj = {}
       myobj.name = this.cardList[this.randCardList[num]].name
       myobj.price = this.cardList[this.randCardList[num]].price
+      //if (this.cart.indexOf(myobj) == 1) {
       this.cart.push(myobj)
       this.total += this.cardList[this.randCardList[num]].price
+      this.cart.yes = 0
+      //}
+      //else {
+      //  this.cart
+      //  this.total += this.cardList[this.randCardList[num]].price
+      //}
     },
     deleteitem: function (num) {
       this.cart.splice(num, 1);
