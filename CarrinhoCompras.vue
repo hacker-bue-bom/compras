@@ -13,192 +13,211 @@
     <div class="bdy">
       <div class="item_container">
         <div v-for="(card, num) in controlVar " :key="num">   <!--vamos mostar "controlVar" numero de cartas-->
-          <button class="item" @click="addcard(card)" >
-            <img :src="getImage(cardList[randdd(controlVar, cardList.length)].image)" alt="" class="card" />
+          <button class="item" @click="addcard(num)">
+            <img :src="getImage(num)" alt="" class="card"/>
           </button>
         </div>
       </div>
       <div class="right_thing">
-        column on the right that adds the items and gives the price total
-        <div class="actual_right_thing">the actual shopping cart</div>
+        <div class="actual_right_thing" >   <!--v-for="(carta, num) in cart" :key="num"-->
+          {{cart}} <br>
+        </div>
+        <div class="buy">
+          total a pagar: {{total}} €
+          <button @click="addcard(num)">
+           buy
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </template>
-
 
 <script>
 export default {
   el: "app",
   data() {
     return {
-      res: [],
+      total: 0,
+      counter: 0,
+      a: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+      randCardList: [],
       controlVar: Math.floor(Math.random() * (10 -5 + 1)) +5, //variavel de controlo: quero no minimo 5 cartas e 10 no maximo para mostrar
       cardList: [
         {
           name: "pikachu",
           price: 12,
           image: "pikachu.jpg",
+          yes: 1
         },
         {
           name: "mew",
           price: 2,
           image: "mew.png",
+          yes: 1
         },
         {
           name: "arceus",
-          price: 2,
+          price: 25,
           image: "arceus.jpg",
+          yes: 1
         },
-
         {
           name: "ball",
-          price: 2,
+          price: 129,
           image: "ball.jpg",
+          yes: 1
         },
-
         {
           name: "celebi",
-          price: 2,
+          price: 15,
           image: "celebi.png",
+          yes: 1
         },
-
         {
           name: "charizard",
-          price: 2,
+          price: 200,
           image: "charizard.png",
+          yes: 1
         },
-
         {
           name: "dragonite",
-          price: 2,
+          price: 199,
           image: "dragonite.jpg",
+          yes: 1
         },
-
         {
           name: "giratina",
-          price: 2,
+          price: 40,
           image: "giratina.jpg",
+          yes: 1
         },
-
         {
           name: "greninja",
-          price: 2,
+          price: 5,
           image: "greninja.png",
+          yes: 1
         },
-
         {
           name: "jirachi",
           price: 2,
           image: "jirachi.jpg",
+          yes: 1
         },
-
         {
           name: "mewp",
-          price: 2,
+          price: 5,
           image: "mewp.jpg",
+          yes: 1
         },
-
         {
           name: "mewtwo",
-          price: 2,
+          price: 350,
           image: "mewtwo.jpg",
+          yes: 1
         },
-
         {
           name: "rayquaza",
-          price: 2,
+          price: 69,
           image: "rayquaza.jpg",
+          yes: 1
         },
         {
           name: "umbreon",
-          price: 2,
+          price: 25,
           image: "umbreon.png",
+          yes: 1
         },
         {
           name: "cyn",
-          price: 2,
+          price: 5,
           image: "cyn.jpg",
+          yes: 1
         },
         {
           name: "tyran",
           price: 2,
           image: "tyran.png",
+          yes: 1
         },
         {
           name: "pikamax",
-          price: 2,
+          price: 25,
           image: "pikamax.jpg",
+          yes: 1
         },
         {
           name: "redblue",
-          price: 2,
+          price: 200,
           image: "redblue.jpg",
+          yes: 1
         },
         {
           name: "zoro",
-          price: 2,
+          price: 40,
           image: "zoro.jpg",
+          yes: 1
         },
         {
           name: "energy",
           price: 4,
           image: "energy.jpg",
+          yes: 1
         },
         {
           name: "kek",
-          price: 100,
+          price: 1,
           image: "kekw VMAX.png",
+          yes: 1
         },
       ],
-      cartList: [],
+      cart: [],
     };
   },
   methods: {
-    getImage(nomeImagem) {
-      return require("../assets/cards/" + nomeImagem);
+    getImage(num) {
+      this.randdd(this.controlVar, this.cardList.length)
+      return require("../assets/cards/" + this.cardList[this.randCardList[num]].image);
     },
-    randdd(i, totalcards) {
-
-      
-      //isto apenas esta aqui para ser dinamico, mas basicamente é para criar um array numerado por ordem a partir do tamanho de "cardList"
-      var a = [];
-      var pushme = 0;
-      for (let k = totalcards-1; k >= 0; k--) {
-        a.push(pushme);
-        pushme++;
-      }
-
-      //aqui estamos a criar um novo array escolhendo aleatoriamente elementos do array "a"(defenido acima)
-      var counter = 0;
-      while (counter < i) {
-        var rand = a[Math.floor(Math.random() * a.length)];
-        if (!(this.res.includes(rand))) {
-          //apenas vamos adicionar o numero aleatorio no array se ela nao estiver no array. a fim de evitar repetições
-          this.res.push(rand)
-          return rand
+    randdd() {
+      while (this.counter < this.controlVar) {  
+        var rand = this.a[Math.floor(Math.random() * this.a.length)];
+        if (!(this.randCardList.includes(rand))) {
+          this.randCardList.push(rand)
+          this.counter++
         }
-        else{
-          counter++
-          a.splice(rand, 1)
+        else {
+          this.a.splice(rand,1)
+          if(this.a.length <= 3) {    //???????????
+            console.log("a: " + this.a)
+            console.log("a length: " + this.a.length)
+            this.counter = 22
+            break
+          }
         }
+        console.log("this randCardList: " + this.randCardList)
       }
-      
     },
-
     addcard: function (num) {
-      this.cartList.push({
-        name: this.quantityIN,
-        item: this.itemIN,
-        edit: num,
-      });
+      const myobj = {}
+      myobj.name = this.cardList[this.randCardList[num]].name
+      myobj.price = this.cardList[this.randCardList[num]].price
+      //if (this.cart.indexOf(myobj) == 1) {
+      this.cart.push(myobj)
+      this.total += this.cardList[this.randCardList[num]].price
+      this.cart.yes = 0
+      //}
+      //else {
+      //  this.cart
+      //  this.total += this.cardList[this.randCardList[num]].price
+      //}
     },
     deleteitem: function (num) {
-      this.cartList.splice(num, 1);
+      this.cart.splice(num, 1);
     },
     editar: function (num) {
       //num é a posicao do produto na lista
-      this.cartList[num].edit = true;
+      this.cart[num].edit = true;
     },
   },
 };
@@ -212,18 +231,15 @@ export default {
   height: 100%;
   object-fit: contain;
 }
-
 .card {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
-
 #titcont {
   display: flex;
   justify-content: center;
 }
-
 .titlebox_container {
   border: 6px solid #006400;
   display: flex;
@@ -233,19 +249,16 @@ export default {
   width: 60%;
   height: 3.5cm;
 }
-
 .titlebox {
   display: flex;
   justify-content: space-between;
   background-color: #04aa6d;
   width: 25cm;
 }
-
 .bdy {
   margin: 40px;
   display: flex;
 }
-
 .right_thing {
   background-color: crimson;
   margin-left: auto;
@@ -254,11 +267,9 @@ export default {
   margin-right: 10px;
   width: 250px;
 }
-
 .actual_right_thing {
   background-color: pink;
 }
-
 .item_container {
   background-color: #04aa6d;
   margin: 10px;
@@ -269,7 +280,6 @@ export default {
   justify-content: center;
   border: 6px solid #006400;
 }
-
 .item {
   all: unset;
   background-color: green;
