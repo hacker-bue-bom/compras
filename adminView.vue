@@ -5,7 +5,7 @@
       <p>Formulário para introdução de items na Base de Dados</p>
       <hr />
 
-      <label for="email"><b class="lefty">item</b></label>
+      <label><b class="lefty">item</b></label>
       <input
         type="text"
         placeholder="introduza o item"
@@ -14,7 +14,7 @@
         v-model="item_"
       />
 
-      <label for="psw"><b class="lefty">URL</b></label>
+      <label><b class="lefty">URL</b></label>
       <input
         type="text"
         placeholder="URL goes here"
@@ -23,7 +23,7 @@
         v-model="url_"
       />
 
-      <label for="psw-repeat"><b class="lefty">Comentário</b></label>
+      <label><b class="lefty">Comentário</b></label>
       <input
         type="text"
         placeholder="comentário goes here"
@@ -32,7 +32,7 @@
         v-model="comentario"
       />
       <hr />
-      <button @click="addnewuser()" type="submit" class="registerbtn">
+      <button @click="save()" type="submit" class="registerbtn">
         Submeter
       </button>
     </div>
@@ -40,19 +40,25 @@
 
     <div v-if="alerta == 2">
       <div class="alert alert-danger" role="alert">
-        É necessário introduzir o email para registar no site. Burro.
+        item field is empty
       </div>
     </div>
 
     <div v-if="alerta == 3">
       <div class="alert alert-danger" role="alert">
-        Boa ideia! Criar uma conta sem password... És um génio
+        url field is empty
+      </div>
+    </div>
+
+    <div v-if="alerta == 1">
+      <div class="alert alert-danger" role="alert">
+        WOW! you did it!
       </div>
     </div>
 
     <div v-if="alerta == 4">
       <div class="alert alert-danger" role="alert">
-        Tens de igualar ambas as passwords......... Besta
+        Error
       </div>
     </div>
 
@@ -62,8 +68,7 @@
 
 
 <script>
-//import firebase from "firebase";          AAAAAAAAAAAAAAAAAAAAAAAAAAHHH
-
+import axios from "axios"
 export default {
   el: "#app",
   data() {
@@ -76,33 +81,33 @@ export default {
   },
 methods: {
       save() {
-        if (this.image == '') {
+        
+        if (this.url_ == '') {
+            this.alerta = 3;
+        } 
+        if (this.item_ == '') {
             this.alerta = 2;
         }
-        if (this.item == '') {
-            this.alerta = 1;
-        } 
-          if (this.item != "" && this.image != ""){
+        if (this.item_ != "" && this.url_ != ""){
           axios
-          .post("https://login-51c7f-default-rtdb.europe-west1.firebasedatabase.app/.json", {
-              item: this.item,
-              image: this.image,
-              description: this.description,
+          .post("https://best-website-c402f-default-rtdb.europe-west1.firebasedatabase.app/.json", {
+              item_: this.item_,
+              url_: this.url_,
+              comentario: this.comentario,
           })
         .then(
             (response) => (
                 (this.articleId = response.data.id),
-                this.$router.push("/admin")
+                this.$router.push("/adminView")
             )
         )
+        this.alerta = 1
         } else {
-            console.log("Error.");
+          console.log("Error.");
         }
       }
     }
 }
-
-//export var users2 = users
 </script>
 
 
