@@ -1,0 +1,125 @@
+<template>
+  <div >
+    <div class="admin-page" >
+      <div class="adi">Admin Login</div>
+      <div class="form3" >
+        <form class="login-form2">
+          <input type="text" autocomplete="off" placeholder="Email Address" name="email" id="email" v-model="email_admin" />
+
+          <input type="password" autocomplete="off" placeholder="Password" name="psw" id="psw" v-model="password_admin" />
+
+          <button @click="logIn()" class="loginbtn" >login</button>
+        </form>
+      </div>
+      <div>
+        <img src="../assets/boss.png" alt="boss" class="boss" />
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<script>
+export default {
+  name: "AdminForm",
+  data() {
+    return {
+      email_admin: "",
+      password_admin: "",
+      alerta: 0,
+    }
+  },
+  methods: {
+      logIn() {
+          if (this.email_admin == "admin_email@gmail.com" && this.password_admin == "123456789"){
+                localStorage.setItem('admin', 1)
+            this.$router.push("/adminView");
+        } else {
+            console.log("Error.");
+        }
+      }
+    } //http://localhost:8080/#/adminView
+}
+</script>
+
+<style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.adi{
+  color: green;
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 32px;
+  padding: 16px;
+  margin-bottom:10px;
+}
+.admin-page {
+  width: 360px;
+  margin: auto;
+}
+
+.boss {
+  width: 360px;
+}
+.form3 {
+  border: solid;
+  border-radius: 20px;
+  position: relative;
+  z-index: 1;
+  background: white;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  
+}
+.form3 input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  color: #000000;
+  border: solid;
+  border-radius: 20px;
+  overflow-wrap: break-word; 
+}
+.form3 button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  border: solid;
+  border-radius: 20px;
+}
+.form3 button:hover,.form3 button:active,.form3 button:focus {
+  background: #43A047;
+}
+.form3 .administracao {
+  margin: 0 -0p 0;
+  color: #4CAF50;
+  font-size: 30px;
+}
+.form3 .description {
+    size: 10px;
+}
+body {
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+</style>
